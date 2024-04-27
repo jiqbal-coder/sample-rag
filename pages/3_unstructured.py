@@ -106,6 +106,7 @@ if uploaded_file is not None:
     file_contents = uploaded_file.getbuffer()
     file_name = uploaded_file.name
     resp, elements, tables, final_text = process_file(file_contents, file_name)
+    embedding = embed(final_text,uploaded_file.name)
     with st.sidebar.expander("pdfcontent"):
         st.write(final_text)
     #final_resp=process_query(final_text)
