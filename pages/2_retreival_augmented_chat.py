@@ -42,6 +42,8 @@ def augmented_content(inp):
     #print(f"Results: {results}")
     #st.write(f"Results: {results}")
     rr=[ r['metadata']['text'] for r in results['matches']]
+    hh=[ r['metadata']['hash'] for r in results['matches']]
+    print(f"HH: {hh}")
     #print(f"RR: {rr}")
     #st.write(f"RR: {rr}")
     return rr

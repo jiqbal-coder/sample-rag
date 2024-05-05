@@ -60,6 +60,7 @@ def embed(text,filename):
         hash=hashlib.md5(d.page_content.encode('utf-8')).hexdigest()
         embedding=client.embeddings.create(model="text-embedding-ada-002", input=d.page_content).data[0].embedding
         metadata={"hash":hash,"text":d.page_content,"index":idx,"model":"text-embedding-ada-003","docname":filename}
+        print(f"hash={hash}, index={idx} text={d.page_content}")
         index.upsert([(hash,embedding,metadata)])
     return
 
@@ -85,6 +86,8 @@ uploaded_file=st.file_uploader("Upload PDF file",type="pdf")
 if uploaded_file is not None:
     if st.button('Process and Upload File'):
         pdf_text = pdf_to_text(uploaded_file)
+        with open("uploaded_file.pdf", "w") as f:
+            f.write(pdf_text)
         embedding = embed(pdf_text,uploaded_file.name)
     st.write("# Welcome to Streamlit! 👋")
 
